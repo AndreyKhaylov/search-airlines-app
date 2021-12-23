@@ -1,7 +1,12 @@
+import React from 'react';
+
+import { FlightsList, SearchParams } from './components';
+
 function App() {
   return (
     <div>
-      <h1>Airline App</h1>
+      <SearchParams />
+      <FlightsList />
     </div>
   );
 }
