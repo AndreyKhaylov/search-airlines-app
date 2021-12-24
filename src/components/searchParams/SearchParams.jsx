@@ -1,9 +1,6 @@
 import React from 'react';
 
-import { Sort } from './Sort';
-import { Filter } from './Filter';
-import { SettingPrice } from './SettingPrice';
-import { SelectionAirline } from './SelectionAirline';
+import { Sort, Filter, SettingPrice, SelectionAirline } from './';
 
 export const SearchParams = () => {
     return (
