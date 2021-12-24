@@ -3,13 +3,13 @@ import React from 'react';
 export const SelectionAirline = () => {
 
     const onSetAirlines = (e) => {
-        const valueSort = e.target.value
-        console.log(valueSort)
+        const valueAirlines = e.target.value
+        console.log(valueAirlines)
     }
 
     return (
         <div>
-            <h4>Фильтровать</h4>
+            <h4>Авикомпания</h4>
             <label>
                 <input
                     type='checkbox'
