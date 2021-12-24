@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+
+import { Sort } from './Sort';
 
 export const SearchParams = () => {
     return (
         <div>
-            SearchParams Block
+            <Sort />
         </div>
     )
 }
