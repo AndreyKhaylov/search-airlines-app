@@ -2,37 +2,33 @@ import React from 'react';
 
 export const FlightTimeInfo = ({info}) => {
     
-    const [ location, date, transfers, airline, duration ] = info
-    console.log('location', location)
+    console.log('info', info)
 
     return (
         <div>
-            {/* {
-                location.map((location, i) => {
-                    <div key={i}>
-                        <span>
-                            <p>{location.city.departure}</p>
-                            <p>{airport.name.departure}</p>
-                            <p>{airport.uid.departure}</p>
-                            <p>`&gt;`</p>
-                            <p>{city.arrival}</p>
-                            <p>{airport.name.arrival}</p>
-                            <p>{airport.uid.arrival}</p>
-                        </span>
-                    </div>
-                })
-            }
-            {
-                date.map((date, i) => {
-                    <span key={i}>
-                        <p>{date.departure}</p>
-                        <p>`&gt;` {duration}</p>
-                        <p>{date.arrival}</p>
-                    </span>
-                })
-            }
-            <div>{(transfers !== 0) && transfers}</div>
-            <div>Рейс выполняет: {airline.code} {airline.name}</div> */}
+            <section>
+                <span>{info[0].departureCity}</span>
+                <span>{info[0].departureAirport.name}</span>
+                <span>({info[0].departureAirport.uid})</span>
+                <span>-&gt; </span>
+                <span>{info[1].arrivalCity}</span>
+                <span>{info[1].arrivalAirport.name}</span>
+                <span>({info[1].arrivalAirport.uid})</span>
+            </section>
+            <section>
+                <span>{info[0].departureDate}</span>
+                <span>{info[4]}</span>
+                <span>{info[1].arrivalDate}</span>
+            </section>
+            <section>
+                <span>{info[3]} пересадка</span>
+                <span></span>
+            </section>
+            <section>
+                <span>{info[3]} пересадка</span>
+                <span></span>
+            </section>
+            <section>Рейс выполняет: {info[2].name}</section>
         </div>
     )
 }

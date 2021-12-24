@@ -3,12 +3,12 @@ import React from 'react';
 import { FlightInfo } from './FlightInfo';
 import data from '../../data/singl.json';
 
-const flight = data.result.flights;
+const flights = data.result.flights;
 
 export const FlightsList = () => {
     return (
         <>
-            {flight.map(({flight, flightToken}) => (
+            {flights.map(({flight, flightToken}) => (
                 <section key={flightToken}>
                     <FlightInfo {...flight} />
                     <button>

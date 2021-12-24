@@ -12,7 +12,6 @@ export const FlightInfo = ({...flight}) => {
         const transfers = legs.segments.length - 1
         const airline = {
             name: legs.segments[0].airline.caption,
-            code: legs.segments[0].airline.airlineCode,
         }  
 
         const transit = (transit) => {
@@ -21,30 +20,27 @@ export const FlightInfo = ({...flight}) => {
             if((transfers > 0) && (transit === 'arrival')) {
                 num = transfers;
             }
+
+            const segments = legs.segments[num];
+
             return {
-                city: {
-                    [`${transit}`]: legs.segments[num][`${transit}City`].caption,
-                },              
-                airport: {
-                    [`${transit}`]: {
-                        name: legs.segments[num][`${transit}Airport`].caption,
-                        uid: legs.segments[num][`${transit}Airport`].uid,
-                    },
+                [`${transit}City`]: segments[`${transit}City`].caption,                              
+                [`${transit}Airport`]: {
+                    name: segments[`${transit}Airport`].caption,
+                    uid: segments[`${transit}Airport`].uid,
                 },
-                date: {
-                    [`${transit}`]: legs.segments[num][`${transit}Date`],
-                },
+                [`${transit}Date`]: segments[`${transit}Date`],
             }
         }
 
-        const dep = transit('departure')
-        const arvl = transit('arrival')
+        const dep = transit('departure');
+        const arvl = transit('arrival');
 
-        const date = [dep.date, dep.date]
-        const location = [dep, arvl]
-
-        return [ location, date, transfers, airline, duration ]
+        return [ dep, arvl, airline, transfers, duration ]
     }
+
+    const flightTo = flightData(0);
+    const flightFrom = flightData(1)
 
     return (
         <div>
@@ -56,13 +52,9 @@ export const FlightInfo = ({...flight}) => {
                 </div>
             </section>
             <section>
-                <FlightTimeInfo 
-                    info={flightData(0)}
-                />
+                <FlightTimeInfo info={flightTo} />
                 <div></div>
-                <FlightTimeInfo 
-                    info={flightData(1)}
-                />
+                <FlightTimeInfo info={flightFrom} />
             </section>
         </div>
     )
