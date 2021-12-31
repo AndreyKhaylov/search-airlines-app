@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { FlightsList, SearchParams } from './components';
-import { addDataFlights } from './store/reducers/dataReducer';
+import { addDataToState } from './store/reducers/dataReducer';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(addDataFlights());
+    dispatch(addDataToState());
   }, []);
 
   return (

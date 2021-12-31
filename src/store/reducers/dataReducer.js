@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import data from '../../data/singl.json';
-
 export const slice = createSlice({
   name: 'data',
   initialState: {
@@ -23,10 +21,11 @@ export const { fetchLoading, setDataToState } = slice.actions;
 
 export const selectData = (state) => state.data;
 
-const dataServ = data;
-
-export const addDataFlights = () => (dispatch) => {
-  dispatch(setDataToState(dataServ));
+export const addDataToState = () => async (dispatch) => {
+  await fetch('http://localhost:3001/result/')
+    .then((res) => res.json())
+    .then(({ flights }) => dispatch(setDataToState(flights)))
+    .catch((err) => console.log('error', err));
 };
 
 export default slice.reducer;
