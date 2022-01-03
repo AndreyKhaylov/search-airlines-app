@@ -23,8 +23,9 @@ export const { fetchLoading, setDataToState } = slice.actions;
 
 export const selectData = (state) => state.data;
 
-export const addDataToState = () => (dispatch) => {
-  requestAPI().then(({ flights }) => dispatch(setDataToState(flights)));
+export const addDataToState = () => async (dispatch) => {
+  const response = await requestAPI();
+  dispatch(setDataToState(response.flights));
 };
 
 export default slice.reducer;
