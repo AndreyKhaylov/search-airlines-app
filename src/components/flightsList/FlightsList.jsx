@@ -1,11 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { FlightInfo } from './FlightInfo';
 import data from '../../data/singl.json';
+import { selectData } from '../../store/reducers/dataReducer';
 
 const flights = data.result.flights;
 
 export const FlightsList = () => {
+
+    const state = useSelector(selectData)
+    console.log("state", state)
+
     return (
         <>
             {flights.map(({flight, flightToken}) => (

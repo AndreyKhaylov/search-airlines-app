@@ -1,9 +1,9 @@
 import React from 'react';
 
 export const SettingPrice = () => {
-    const [price, setPrice] = useState({
-        down: null,
-        up: null,
+    const [price, setPrice] = React.useState({
+        down: 0,
+        up: 0,
     })
 
     const onSettingPrice = (e) => {
