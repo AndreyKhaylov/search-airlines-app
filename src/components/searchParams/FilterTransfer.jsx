@@ -1,10 +1,14 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const Filter = () => {
+import { filterFlights } from '../../store/reducers/filterReducer';
+
+export const FilterTransfer = () => {
+    const dispatch = useDispatch();
 
     const onSetTypeFilter = (e) => {
-        const valueSort = e.target.value
-        console.log(valueSort)
+        const { checked, value } = e.target
+        dispatch(filterFlights({ value, checked }))
     }
 
     return (
@@ -14,7 +18,7 @@ export const Filter = () => {
                 <input
                     type='checkbox'
                     name='filter'
-                    value={'filterOneTransfer'}
+                    value={'oneTransfer'}
                     onChange={onSetTypeFilter}
                 />
                 - 1 пересадка
@@ -23,7 +27,7 @@ export const Filter = () => {
                 <input
                     type='checkbox'
                     name='filter'
-                    value={'filterWithoutTransfer'}
+                    value={'withoutTransfer'}
                     onChange={onSetTypeFilter}
                 />
                 - без пересадок

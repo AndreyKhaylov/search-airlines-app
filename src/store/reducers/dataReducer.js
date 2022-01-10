@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { requestAPI } from '../../api/request';
 
+import { filterFlights } from './filterReducer';
+
 export const slice = createSlice({
   name: 'data',
   initialState: {
@@ -26,6 +28,7 @@ export const selectData = (state) => state.data;
 export const addDataToState = () => async (dispatch) => {
   const response = await requestAPI();
   dispatch(setDataToState(response.flights));
+  dispatch(filterFlights());
 };
 
 export default slice.reducer;
