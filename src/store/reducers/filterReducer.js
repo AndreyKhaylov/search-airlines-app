@@ -26,6 +26,7 @@ export const slice = createSlice({
       };
 
       if (tr__1 === true && tr__0 === true) {
+        state.data = payload;
       } else if (tr__1 === true && tr__0 === false) {
         state.data = filterTranfers(1);
       } else if (tr__1 === false && tr__0 === true) {
