@@ -1,10 +1,15 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+
+import { filterAirlines } from '../../store/reducers/selectionReducer';
+
 export const SelectionAirline = () => {
+    const dispatch = useDispatch()
 
     const onSetAirlines = (e) => {
-        const valueAirlines = e.target.value
-        console.log(valueAirlines)
+        const { checked, value } = e.target
+        dispatch(filterAirlines({ value, checked }))
     }
 
     return (
@@ -14,7 +19,7 @@ export const SelectionAirline = () => {
                 <input
                     type='checkbox'
                     name='select'
-                    value={'selectPolishAirlines'}
+                    value={'polishAirlines'}
                     onChange={onSetAirlines}
                 />
                 - LOT Polish Airlines
@@ -23,7 +28,7 @@ export const SelectionAirline = () => {
                 <input
                     type='checkbox'
                     name='select'
-                    value={'selectAirflotAirlines'}
+                    value={'airflotAirlines'}
                     onChange={onSetAirlines}
                 />
                 - Аэрофлот
