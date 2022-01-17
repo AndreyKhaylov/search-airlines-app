@@ -8,7 +8,7 @@ export const slice = createSlice({
   name: 'data',
   initialState: {
     isLoading: false,
-    data: {},
+    data: [],
   },
   reducers: {
     fetchLoading: () => ({
