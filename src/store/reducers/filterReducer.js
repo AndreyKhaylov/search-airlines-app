@@ -42,7 +42,7 @@ export const slice = createSlice({
 
 export const { filterTransfers, setFilteredData } = slice.actions;
 
-export const selectFilterData = (state) => state.filter.data;
+export const selectFilterData = (state) => state.data;
 
 export const filterFlights = (payload) => (dispatch, getState) => {
   const { data } = selectData(getState());

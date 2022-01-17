@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { filterAirlines } from '../../store/reducers/selectionReducer';
+import { selectData } from '../../store/reducers/dataReducer';
 
 export const SelectionAirline = () => {
     const dispatch = useDispatch()
+    const selector = useSelector(selectData)
+
+    console.log('@@@ data', selector)
 
     const onSetAirlines = (e) => {
         const { checked, value } = e.target
@@ -19,19 +23,28 @@ export const SelectionAirline = () => {
                 <input
                     type='checkbox'
                     name='select'
-                    value={'polishAirlines'}
+                    value={'Air France'}
                     onChange={onSetAirlines}
                 />
-                - LOT Polish Airlines
+                - Air France
             </label>
             <label>
                 <input
                     type='checkbox'
                     name='select'
-                    value={'airflotAirlines'}
+                    value={'KLM'}
                     onChange={onSetAirlines}
                 />
-                - Аэрофлот
+                - KLM
+            </label>
+            <label>
+                <input
+                    type='checkbox'
+                    name='select'
+                    value={'Аэрофлот - российские авиалинии'}
+                    onChange={onSetAirlines}
+                />
+                - Аэрофлот - российские авиалинии
             </label>
         </div>
     )

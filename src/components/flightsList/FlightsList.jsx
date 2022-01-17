@@ -10,7 +10,6 @@ const flights = data.result.flights;
 export const FlightsList = () => {
 
     const state = useSelector(selectData)
-    console.log("state", state)
 
     return (
         <>

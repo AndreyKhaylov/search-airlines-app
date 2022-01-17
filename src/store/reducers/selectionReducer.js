@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { selectFilterData } from './filterReducer';
 
 const slice = createSlice({
-  name: 'selectionAirlines',
+  name: 'airlines',
   initialState: {
     data: [],
     type: {},
@@ -14,34 +14,27 @@ const slice = createSlice({
       state.type[value] = checked;
     },
     setFilteredData(state, action) {
-      const { data } = action.payload;
+      const { payload } = action;
 
-      // const filterAirlines = (T = 0) => {
-      //     const legs = (f, L) => f.legs[L].segments.length; // L(e.g. legs) - flight direction, to - "0", back - "1"
-      //     return payload.filter(({ flight }) => legs(flight, 0) === T && legs(flight, 1) === T);
-      //   };
-
-      //   if (tr__1 === true && tr__0 === true) {
-      //     state.data = payload;
-      //   } else if (tr__1 === true && tr__0 === false) {
-      //     state.data = filterAirlines(1);
-      //   } else if (tr__1 === false && tr__0 === true) {
-      //     state.data = filterAirlines(0);
-      //   } else if (tr__1 === false && tr__0 === false) {
-      //     state.data = payload;
-      //   } else {
-      //     return state;
-      //   }
+      if (state.type.noSuchProperty === undefined) {
+        const filter = payload.filter(
+          ({ flight: { carrier } }) => state.type[carrier.caption] === true,
+        );
+        state.data = filter;
+      } else {
+        return state;
+      }
     },
   },
 });
 
 export const { checkAirlines, setFilteredData } = slice.actions;
 
-export const selectFilterData = (state) => state.selectionAirlines.data;
+export const selectionAirlinesData = (state) => state.data;
 
 export const filterAirlines = (payload) => (dispatch, getState) => {
   const { data } = selectFilterData(getState());
+  console.log('data', data);
   payload && dispatch(checkAirlines(payload));
   dispatch(setFilteredData(data));
 };
