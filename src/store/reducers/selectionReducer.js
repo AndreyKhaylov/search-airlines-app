@@ -34,7 +34,6 @@ export const selectionAirlinesData = (state) => state.data;
 
 export const filterAirlines = (payload) => (dispatch, getState) => {
   const { data } = selectFilterData(getState());
-  console.log('data', data);
   payload && dispatch(checkAirlines(payload));
   dispatch(setFilteredData(data));
 };

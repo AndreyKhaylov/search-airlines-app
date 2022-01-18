@@ -1,45 +1,59 @@
 import React from 'react';
 
+import { sortData } from '../../store/reducers/sortReducer';
+
+const title = {
+    title: 'Сортировать',
+    incrementPrice: '- По возрвстанию цены',
+    decrementPrice: '- По убыванию цены',
+    time: '- По времени в пути'
+},
+
+const sortBy = {
+    incrementPrice: 'increment',
+    decrementPrice: 'decrement',
+    time: 'time',
+},
+
 export const Sort = () => {
-    const [value, setValue] = React.useState('sortByToUpPrice');
 
     const onSetTypeSort = (e) => {
-        const valueSort = e.target.value
-        setValue(valueSort)
+        const { value } = e.target
+        dispatch(sortData({ value }))
     }
 
     return (
         <section>
-            <h4>Сортировать</h4>
+            <h4>{ title.title }</h4>
             <label>
                 <input
                     type='radio'
                     name='sort'
-                    value={'sortByToUpPrice'}
+                    value={sortBy.incrementPrice}
                     onChange={onSetTypeSort}
-                    checked={value === 'sortByToUpPrice'}
+                    checked={value === sortBy.incrementPrice}
                 />
-                - По возрвстанию цены
+                { title.incrementPrice }
             </label>
             <label>
                 <input
                     type='radio'
                     name='sort'
-                    value={'sortByToDownPrice'}
+                    value={sortBy.decrementPrice}
                     onChange={onSetTypeSort}
-                    checked={value === 'sortByToDownPrice'}
+                    checked={value === sortBy.decrementPrice}
                 />
-                - По убыванию цены
+                 { title.decrementPrice }
             </label>
             <label>
                 <input
                     type='radio'
                     name='sort'
-                    value={'sortByTime'}
+                    value={sortBy.time}
                     onChange={onSetTypeSort}
-                    checked={value === 'sortByTime'}
+                    checked={value === sortBy.time}
                 />
-                - По времени в пути
+                { title.time }
             </label>
         </section>
     )
