@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import { sortData } from '../../store/reducers/sortReducer';
 
@@ -7,20 +8,21 @@ const title = {
     incrementPrice: '- По возрвстанию цены',
     decrementPrice: '- По убыванию цены',
     time: '- По времени в пути'
-},
+};
 
 const sortBy = {
     incrementPrice: 'increment',
     decrementPrice: 'decrement',
     time: 'time',
-},
+};
 
 export const Sort = () => {
+    const dispatch = useDispatch()
 
     const onSetTypeSort = (e) => {
-        const { value } = e.target
+        const { value } = e.target;
         dispatch(sortData({ value }))
-    }
+    };
 
     return (
         <section>

@@ -15,6 +15,26 @@ const slice = createSlice({
     },
     setSortedData(state, action) {
       const { payload } = action;
+
+      // function compareNumeric(a, b) {
+      //   if (a > b) return 1;
+      //   if (a == b) return 0;
+      //   if (a < b) return -1;
+      // }
+
+      if (state.sortBy === 'increment') {
+        state.data = payload
+          .map(({ flight: { price } }) => price.total.amount)
+          .sort((a, b) => a + b);
+      } else if (state.sortBy === 'decrement') {
+        state.data = payload
+          .map(({ flight: { price } }) => price.total.amount)
+          .sort((a, b) => a - b);
+      } else if (state.sortBy === 'time') {
+        state.data = payload.map(({ flight: { legs } }) => legs[0].duration).sort((a, b) => a + b);
+      } else {
+        return state;
+      }
     },
   },
 });
@@ -25,7 +45,7 @@ export const selectionSortData = (state) => state.data;
 
 export const sortData = (payload) => (dispatch, getState) => {
   const { data } = selectionAirlinesData(getState());
-  payload && dispatch(checkAirlines(payload));
+  payload && dispatch(checkType(payload));
   dispatch(setSortedData(data));
 };
 
