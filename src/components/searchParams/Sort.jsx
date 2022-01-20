@@ -1,7 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { sortData } from '../../store/reducers/sortReducer';
+import { sortData, selectionSortData, selectionSortType} from '../../store/reducers/sortReducer';
 
 const title = {
     title: 'Сортировать',
@@ -18,6 +18,10 @@ const sortBy = {
 
 export const Sort = () => {
     const dispatch = useDispatch()
+    const sortingType = useSelector(selectionSortType)
+    const sortingData = useSelector(selectionSortData)
+
+    console.log("selectionSortData", sortingData)
 
     const onSetTypeSort = (e) => {
         const { value } = e.target;
@@ -33,7 +37,7 @@ export const Sort = () => {
                     name='sort'
                     value={sortBy.incrementPrice}
                     onChange={onSetTypeSort}
-                    checked={value === sortBy.incrementPrice}
+                    checked={sortingType === sortBy.incrementPrice}
                 />
                 { title.incrementPrice }
             </label>
@@ -43,7 +47,7 @@ export const Sort = () => {
                     name='sort'
                     value={sortBy.decrementPrice}
                     onChange={onSetTypeSort}
-                    checked={value === sortBy.decrementPrice}
+                    checked={sortingType === sortBy.decrementPrice}
                 />
                  { title.decrementPrice }
             </label>
@@ -53,7 +57,7 @@ export const Sort = () => {
                     name='sort'
                     value={sortBy.time}
                     onChange={onSetTypeSort}
-                    checked={value === sortBy.time}
+                    checked={sortingType === sortBy.time}
                 />
                 { title.time }
             </label>
