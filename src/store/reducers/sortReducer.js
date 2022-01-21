@@ -15,36 +15,40 @@ const slice = createSlice({
     },
     setSortedData(state, action) {
       const { payload } = action;
-      // function compareNumeric(a, b) {
-      //   if (a > b) return 1;
-      //   if (a == b) return 0;
-      //   if (a < b) return -1;
-      // }
-      const quickSort = (array) => {
+
+      const quickSort = (array, type) => {
         if (array.length <= 1) {
           return array;
         }
         let pivotIndex = Math.floor(array.length / 2);
-        let pivot = array[pivotIndex];
+        let pivot = array[pivotIndex].flight.price.total.amount;
         let less = [];
         let greater = [];
         for (let i = 0; i < array.length; i++) {
           if (i === pivotIndex) continue;
-          if (array[i] < pivot) {
+          if (array[i].flight.price.total.amount < pivot) {
             less.push(array[i]);
           } else {
             greater.push(array[i]);
           }
         }
-        return [...quickSort(less), pivot, ...quickSort(greater)];
+        const result = [...quickSort(less), array[pivotIndex], ...quickSort(greater)];
+        switch (type) {
+          case 'increment': {
+            return result;
+          }
+          case 'decrement': {
+            return result.revers();
+          }
+          default:
+            return;
+        }
       };
 
       if (state.sortBy === 'increment') {
-        state.data = quickSort(payload);
+        state.data = quickSort(payload, 'increment');
       } else if (state.sortBy === 'decrement') {
-        state.data = payload
-          .map(({ flight: { price } }) => price.total.amount)
-          .sort((a, b) => a - b);
+        state.data = quickSort(payload, 'decrement');
       } else if (state.sortBy === 'time') {
         state.data = payload.map(({ flight: { legs } }) => legs[0].duration).sort((a, b) => a + b);
       } else {
