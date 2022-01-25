@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { sortData, selectionSortData, selectionSortType} from '../../store/reducers/sortReducer';
+import { sortData, selectionSortType} from '../../store/reducers/sortReducer';
 
 const title = {
     title: 'Сортировать',
@@ -19,9 +19,6 @@ const sortBy = {
 export const Sort = () => {
     const dispatch = useDispatch()
     const sortingType = useSelector(selectionSortType)
-    const sortingData = useSelector(selectionSortData)
-
-    console.log("selectionSortData", sortingData)
 
     const onSetTypeSort = (e) => {
         const { value } = e.target;

@@ -16,7 +16,7 @@ const slice = createSlice({
     setSortedData(state, action) {
       const { payload } = action;
 
-      const quickSort = (array, type) => {
+      const quickSort = (array) => {
         if (array.length <= 1) {
           return array;
         }
@@ -33,22 +33,13 @@ const slice = createSlice({
           }
         }
         const result = [...quickSort(less), array[pivotIndex], ...quickSort(greater)];
-        switch (type) {
-          case 'increment': {
-            return result;
-          }
-          case 'decrement': {
-            return result.revers();
-          }
-          default:
-            return;
-        }
+        return result;
       };
 
       if (state.sortBy === 'increment') {
-        state.data = quickSort(payload, 'increment');
+        state.data = quickSort(payload);
       } else if (state.sortBy === 'decrement') {
-        state.data = quickSort(payload, 'decrement');
+        state.data = quickSort(payload).reverse();
       } else if (state.sortBy === 'time') {
         state.data = payload.map(({ flight: { legs } }) => legs[0].duration).sort((a, b) => a + b);
       } else {
