@@ -1,14 +1,16 @@
 import React from 'react';
 
+import { settingPriceData } from '../../store/reducers/settingPriceReducer'
+
 export const SettingPrice = () => {
-    const [price, setPrice] = React.useState({
-        down: 0,
-        up: 0,
-    })
+    // const [range, setPrice] = React.useState({
+    //     down: 0,
+    //     up: 0,
+    // })
 
     const onSettingPrice = (e) => {
-        const valuePrice = e.target.value
-        console.log(valuePrice)
+        const { value } = e.target
+        dispatch(settingPriceData(range))
     }
 
     return (
@@ -18,8 +20,8 @@ export const SettingPrice = () => {
                 От
                 <input
                     type='number'
-                    name='price'
-                    value={price.down}
+                    name='range'
+                    value={range.down}
                     onChange={(e) => onSettingPrice(e)}
                 />
             </label>
@@ -27,8 +29,8 @@ export const SettingPrice = () => {
                 До
                 <input
                     type='number'
-                    name='price'
-                    value={price.up}
+                    name='range'
+                    value={range.up}
                     onChange={(e) => onSettingPrice(e)}
                 />
             </label>
