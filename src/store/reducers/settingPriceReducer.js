@@ -14,20 +14,18 @@ const slice = createSlice({
   },
   reducers: {
     checkRange(state, action) {
-      const { down, up } = action.payload;
-      if (down && up) {
-        state.range = action.payload;
-      } else {
-        state.range[Object.keys(action.payload)] = down || up;
-      }
+      const { payload } = action;
+      const { range } = state;
+      if (payload.down) range.down = payload.down;
+      if (payload.up) range.up = payload.up;
     },
     setFilterPrice(state, action) {
       const { payload } = action;
       const { down, up } = state.range;
-      const filtering = payload.filter(
+      const filter = payload.filter(
         ({ flight: { price } }) => down <= +price.total.amount && +price.total.amount <= up,
       );
-      state.data = filtering;
+      state.data = filter;
     },
   },
 });
