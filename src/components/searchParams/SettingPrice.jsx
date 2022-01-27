@@ -4,6 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { settingPriceData, selectionSettingType, selectionSettingData } from '../../store/reducers/settingPriceReducer'
 import useDebounce from '../../hook/useDebounce';
 
+const text = {
+    title: 'Цена',
+    priceFrom: 'От',
+    priceTo: 'До'
+}
+
 export const SettingPrice = () => {
     const dispatch = useDispatch()
     const selectorType = useSelector(selectionSettingType)
@@ -26,9 +32,9 @@ export const SettingPrice = () => {
 
     return (
         <div>
-            <h4>Цена</h4>
+            <h4>{text.title}</h4>
             <label>
-                От
+                {text.priceFrom}
                 <input
                     type='number'
                     name='down'
@@ -37,7 +43,7 @@ export const SettingPrice = () => {
                 />
             </label>
             <label>
-                До
+                {text.priceTo}
                 <input
                     type='number'
                     name='up'
