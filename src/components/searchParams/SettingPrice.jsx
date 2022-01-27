@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { settingPriceData } from '../../store/reducers/settingPriceReducer'
+import { settingPriceData, selectionSettingType, selectionSettingData } from '../../store/reducers/settingPriceReducer'
+import useDebounce from '../../hook/useDebounce';
 
 export const SettingPrice = () => {
-    const [range, setPrice] = React.useState({
-        down: 0,
-        up: 0,
-    })
+    const dispatch = useDispatch()
+    const selectorType = useSelector(selectionSettingType)
+    const selectorData = useSelector(selectionSettingData)
 
-    const onSettingPrice = useCallback(
-        async(e) => {
-            const { value } = e.target
-            setPrice(value)
-            dispatch(settingPriceData(range))
-        }, [])    
+    const [range, setRange] = useState({})
+
+    const debounce = useDebounce((value) => {
+        dispatch(settingPriceData(value))
+    }, 750)
+
+    const onSettingPrice = (e) => {
+        const { name, value } = e.target
+        setRange({ ...range, [name]: Number(value) })
+        debounce(range)
+    }
+
+    console.log('selectorType', selectorType)
+    console.log('selectorData', selectorData)
 
     return (
         <div>
@@ -22,7 +31,7 @@ export const SettingPrice = () => {
                 От
                 <input
                     type='number'
-                    name='range'
+                    name='down'
                     value={range.down}
                     onChange={(e) => onSettingPrice(e)}
                 />
@@ -31,7 +40,7 @@ export const SettingPrice = () => {
                 До
                 <input
                     type='number'
-                    name='range'
+                    name='up'
                     value={range.up}
                     onChange={(e) => onSettingPrice(e)}
                 />

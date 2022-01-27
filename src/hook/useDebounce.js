@@ -9,7 +9,7 @@ function useDebounce(callback, delay) {
         clearTimeout(timer.current);
       }
 
-      time.current = setTimeout(() => {
+      timer.current = setTimeout(() => {
         callback(...args);
       }, delay);
     },
