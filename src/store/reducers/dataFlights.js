@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { requestAPI } from '../../api/request';
 
-import { filterFlights } from './filterReducer';
+import { filtrationTranfers } from './filterTranfers';
 
 export const slice = createSlice({
-  name: 'data',
+  name: 'dataFlights',
   initialState: {
     isLoading: false,
     data: [],
@@ -23,12 +23,12 @@ export const slice = createSlice({
 
 export const { fetchLoading, setDataToState } = slice.actions;
 
-export const selectData = (state) => state.data;
+export const selectData = (state) => state.dataFlights.data;
 
 export const addDataToState = () => async (dispatch) => {
   const response = await requestAPI();
   dispatch(setDataToState(response.flights));
-  dispatch(filterFlights());
+  dispatch(filtrationTranfers());
 };
 
 export default slice.reducer;

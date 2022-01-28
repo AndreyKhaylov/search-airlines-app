@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { filterFlights } from '../../store/reducers/filterReducer';
+import { filtrationTranfers } from '../../store/reducers/filterTranfers';
 
 export const FilterTransfer = () => {
     const dispatch = useDispatch();
 
     const onSetTypeFilter = (e) => {
         const { checked, value } = e.target
-        dispatch(filterFlights({ value, checked }))
+        dispatch(filtrationTranfers({ value, checked }))
     }
 
     return (

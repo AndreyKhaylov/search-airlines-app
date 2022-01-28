@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import dataReducer from './reducers/dataReducer';
-import filterReducer from './reducers/filterReducer';
-import selectionReducer from './reducers/selectionReducer';
-import sortReducer from './reducers/sortReducer';
-import settingPriceReducer from './reducers/settingPriceReducer';
+import dataFlights from './reducers/dataFlights';
+import filterTranfers from './reducers/filterTranfers';
+import filterAirlines from './reducers/filterAirlines';
+import filterPrice from './reducers/filterPrice';
+import sortData from './reducers/sortData';
 
 export const store = configureStore({
   reducer: {
-    data: dataReducer,
-    filter: filterReducer,
-    selection: selectionReducer,
-    sort: sortReducer,
-    setting: settingPriceReducer,
+    dataFlights,
+    filterTranfers,
+    filterAirlines,
+    filterPrice,
+    sortData,
   },
 });

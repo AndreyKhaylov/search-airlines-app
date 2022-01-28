@@ -1,21 +1,21 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { filterAirlines } from '../../store/reducers/selectionReducer';
-import { selectData } from '../../store/reducers/dataReducer';
+import { filtrationAirlines } from '../../store/reducers/filterAirlines';
+import { selectData } from '../../store/reducers/dataFlights';
 
 const AIRLINE = 'Авикомпания';
 
 export const SelectionAirline = () => {
     const dispatch = useDispatch()
-    const { data } = useSelector(selectData)
+    const data = useSelector(selectData)
     const arr = [] // array of unique airlines
     
     const onSetAirlines = (e) => {
         const { checked, value } = e.target
-        dispatch(filterAirlines({ value, checked }))
+        dispatch(filtrationAirlines({ value, checked }))
     }
-    
+
     return (
         <div>
             <h4>{AIRLINE}</h4>

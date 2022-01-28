@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { sortData, selectionSortType} from '../../store/reducers/sortReducer';
+import { sortData, selectionSortType} from '../../store/reducers/sortData';
 
 const title = {
     title: 'Сортировать',

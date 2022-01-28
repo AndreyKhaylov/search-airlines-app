@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// import { selectionSortData } from './sortReducer';
-import { selectData } from './dataReducer';
+import { sortData } from './sortData';
+import { selectionAirlinesData } from './filterAirlines';
 
 const slice = createSlice({
-  name: 'setting',
+  name: 'filterPrice',
   initialState: {
     data: [],
     range: {
@@ -32,14 +32,14 @@ const slice = createSlice({
 
 export const { checkRange, setFilterPrice } = slice.actions;
 
-export const selectionSettingData = (state) => state.setting.data;
-export const selectionSettingType = (state) => state.setting.range;
+export const selectionSettingData = (state) => state.filterPrice.data;
+export const selectionSettingType = (state) => state.filterPrice.range;
 
-export const settingPriceData = (payload) => (dispatch, getState) => {
-  // const { data } = selectionSortData(getState());
-  const { data } = selectData(getState());
-  dispatch(checkRange(payload));
+export const filtrationPrice = (payload) => (dispatch, getState) => {
+  const data = selectionAirlinesData(getState());
+  payload && dispatch(checkRange(payload));
   dispatch(setFilterPrice(data));
+  dispatch(sortData());
 };
 
 export default slice.reducer;

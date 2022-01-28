@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { selectFilterData } from './filterReducer';
+import { selectFilterData } from './filterTranfers';
+import { filtrationPrice } from './filterPrice';
 
 const slice = createSlice({
-  name: 'airlines',
+  name: 'filterAirlines',
   initialState: {
     data: [],
     type: {},
@@ -11,31 +12,31 @@ const slice = createSlice({
   reducers: {
     checkAirlines(state, action) {
       const { value, checked } = action.payload;
-      state.type[value] = checked;
+      if (value && checked) state.type[value] = checked;
     },
     setFilteredData(state, action) {
       const { payload } = action;
 
-      if (state.type.noSuchProperty === undefined) {
+      if (Object.keys(state.type).length === 0) {
         const filter = payload.filter(
           ({ flight: { carrier } }) => state.type[carrier.caption] === true,
         );
         state.data = filter;
-      } else {
-        return state;
       }
+      state.data = payload;
     },
   },
 });
 
 export const { checkAirlines, setFilteredData } = slice.actions;
 
-export const selectionAirlinesData = (state) => state.data;
+export const selectionAirlinesData = (state) => state.filterAirlines.data;
 
-export const filterAirlines = (payload) => (dispatch, getState) => {
-  const { data } = selectFilterData(getState());
+export const filtrationAirlines = (payload) => (dispatch, getState) => {
+  const data = selectFilterData(getState());
   payload && dispatch(checkAirlines(payload));
   dispatch(setFilteredData(data));
+  dispatch(filtrationPrice());
 };
 
 export default slice.reducer;

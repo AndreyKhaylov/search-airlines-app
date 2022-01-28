@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { selectData } from './dataReducer';
+import { selectionSettingData } from './filterPrice';
 
 const slice = createSlice({
-  name: 'sort',
+  name: 'sortData',
   initialState: {
     data: [],
     sortBy: 'increment',
@@ -11,7 +11,7 @@ const slice = createSlice({
   reducers: {
     checkType(state, action) {
       const { value } = action.payload;
-      state.sortBy = value;
+      if (action.payload) state.sortBy = value;
     },
     setSortedData(state, action) {
       const { payload } = action;
@@ -32,8 +32,7 @@ const slice = createSlice({
             greater.push(array[i]);
           }
         }
-        const result = [...quickSort(less), array[pivotIndex], ...quickSort(greater)];
-        return result;
+        return [...quickSort(less), array[pivotIndex], ...quickSort(greater)];
       };
 
       if (state.sortBy === 'increment') {
@@ -42,20 +41,19 @@ const slice = createSlice({
         state.data = quickSort(payload).reverse();
       } else if (state.sortBy === 'time') {
         state.data = payload.map(({ flight: { legs } }) => legs[0].duration).sort((a, b) => a + b);
-      } else {
-        return state;
       }
+      state.data = payload;
     },
   },
 });
 
 export const { checkType, setSortedData } = slice.actions;
 
-export const selectionSortData = (state) => state.sort.data;
-export const selectionSortType = (state) => state.sort.sortBy;
+export const selectionSortData = (state) => state.sortData.data;
+export const selectionSortType = (state) => state.sortData.sortBy;
 
 export const sortData = (payload) => (dispatch, getState) => {
-  const { data } = selectData(getState());
+  const data = selectionSettingData(getState());
   payload && dispatch(checkType(payload));
   dispatch(setSortedData(data));
 };

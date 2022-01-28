@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux';
 
 import { FlightInfo } from './FlightInfo';
 import data from '../../data/singl.json';
-import { selectData } from '../../store/reducers/dataReducer';
+import { selectionSettingData } from '../../store/reducers/filterPrice';
 
 const flights = data.result.flights;
 
 export const FlightsList = () => {
 
-    const state = useSelector(selectData)
+    const flightsT = useSelector(selectionSettingData)
+    console.log('flightsT', flightsT)
 
     return (
         <>
