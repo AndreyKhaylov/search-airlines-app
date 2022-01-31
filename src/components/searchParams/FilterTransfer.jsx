@@ -3,34 +3,46 @@ import { useDispatch } from 'react-redux';
 
 import { filtrationTranfers } from '../../store/reducers/filterTranfers';
 
+const data = {
+    title: 'Фильтровать',
+    value: {
+        0: 'withoutTransfer',
+        1: 'oneTransfer',
+    },
+    label: {
+        0: '- без пересадок',
+        1: '- 1 пересадка'
+    }
+}
+
 export const FilterTransfer = () => {
     const dispatch = useDispatch();
 
     const onSetTypeFilter = (e) => {
-        const { checked, value } = e.target
+        const { value, checked } = e.target
         dispatch(filtrationTranfers({ value, checked }))
     }
 
     return (
         <div>
-            <h4>Фильтровать</h4>
+            <h4>{data.title}</h4>
             <label>
                 <input
                     type='checkbox'
                     name='filter'
-                    value={'oneTransfer'}
+                    value={data.value[1]}
                     onChange={onSetTypeFilter}
                 />
-                - 1 пересадка
+                {data.label[1]}
             </label>
             <label>
                 <input
                     type='checkbox'
                     name='filter'
-                    value={'withoutTransfer'}
+                    value={data.value[0]}
                     onChange={onSetTypeFilter}
                 />
-                - без пересадок
+                {data.label[0]}
             </label>
         </div>
     )

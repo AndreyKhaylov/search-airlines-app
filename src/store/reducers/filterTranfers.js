@@ -13,7 +13,7 @@ export const slice = createSlice({
   reducers: {
     filterTransfers(state, action) {
       const { value, checked } = action.payload;
-      if (value && checked) state[value] = checked;
+      if (action.payload) state[value] = checked;
     },
     setFilteredData(state, action) {
       const { payload } = action;
