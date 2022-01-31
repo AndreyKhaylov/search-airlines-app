@@ -16,6 +16,8 @@ const slice = createSlice({
     setSortedData(state, action) {
       const { payload } = action;
 
+      if (!payload) return;
+
       const quickSort = (array) => {
         if (array.length <= 1) {
           return array;
