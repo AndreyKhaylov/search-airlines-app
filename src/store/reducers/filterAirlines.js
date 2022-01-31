@@ -12,18 +12,19 @@ const slice = createSlice({
   reducers: {
     checkAirlines(state, action) {
       const { value, checked } = action.payload;
-      if (value && checked) state.type[value] = checked;
+      if (action.payload) state.type[value] = checked;
     },
     setFilteredData(state, action) {
       const { payload } = action;
 
-      if (Object.keys(state.type).length === 0) {
+      if (Object.keys(state.type).length !== 0) {
         const filter = payload.filter(
           ({ flight: { carrier } }) => state.type[carrier.caption] === true,
         );
         state.data = filter;
+      } else {
+        state.data = payload;
       }
-      state.data = payload;
     },
   },
 });
