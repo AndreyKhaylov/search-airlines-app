@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { filtrationPrice } from '../../store/reducers/filterPrice';
+import { filtrationPrice } from '../../store/reducers/filtrationPrice';
 import useDebounce from '../../hook/useDebounce';
 
 const text = {
@@ -10,7 +10,7 @@ const text = {
     priceTo: 'До'
 }
 
-export const SettingPrice = () => {
+export const FilterPrice = () => {
     const dispatch = useDispatch()
     const [range, setRange] = useState({})
 

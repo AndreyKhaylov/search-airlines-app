@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { sortData, selectionSortType} from '../../store/reducers/sortData';
+import { sortingData, selectionSortType} from '../../store/reducers/sortingData';
 
 const title = {
     title: 'Сортировать',
@@ -16,13 +16,13 @@ const sortBy = {
     time: 'time',
 };
 
-export const Sort = () => {
+export const SortData = () => {
     const dispatch = useDispatch()
     const sortingType = useSelector(selectionSortType)
 
     const onSetTypeSort = (e) => {
         const { value } = e.target;
-        dispatch(sortData({ value }))
+        dispatch(sortingData({ value }))
     };
 
     return (

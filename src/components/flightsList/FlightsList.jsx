@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { FlightInfo } from './FlightInfo';
 import data from '../../data/singl.json';
-import { selectionSettingData } from '../../store/reducers/filterPrice';
+import { selectionSettingData } from '../../store/reducers/filtrationPrice';
 
 const flights = data.result.flights;
 

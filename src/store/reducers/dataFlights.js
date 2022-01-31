@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { requestAPI } from '../../api/request';
 
-import { filtrationTranfers } from './filterTranfers';
+import { filtrationTranfers } from './filtrationTranfers';
 
 export const slice = createSlice({
   name: 'dataFlights',

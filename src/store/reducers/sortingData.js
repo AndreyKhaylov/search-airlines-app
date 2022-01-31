@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { selectionSettingData } from './filterPrice';
+import { selectionSettingData } from './filtrationPrice';
 
 const slice = createSlice({
-  name: 'sortData',
+  name: 'sortingData',
   initialState: {
     data: [],
     sortBy: 'increment',
@@ -49,10 +49,10 @@ const slice = createSlice({
 
 export const { checkType, setSortedData } = slice.actions;
 
-export const selectionSortData = (state) => state.sortData.data;
-export const selectionSortType = (state) => state.sortData.sortBy;
+export const selectionSortData = (state) => state.sortingData.data;
+export const selectionSortType = (state) => state.sortingData.sortBy;
 
-export const sortData = (payload) => (dispatch, getState) => {
+export const sortingData = (payload) => (dispatch, getState) => {
   const data = selectionSettingData(getState());
   payload && dispatch(checkType(payload));
   dispatch(setSortedData(data));

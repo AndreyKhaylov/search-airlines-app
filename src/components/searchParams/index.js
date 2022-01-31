@@ -1,6 +1,6 @@
-import { Sort } from './Sort';
+import { SortData } from './SortData';
 import { FilterTransfer } from './FilterTransfer';
-import { SettingPrice } from './SettingPrice';
-import { SelectionAirline } from './SelectionAirline';
+import { FilterPrice } from './FilterPrice';
+import { FilterAirline } from './FilterAirline';
 
-export { Sort, FilterTransfer, SettingPrice, SelectionAirline };
+export { SortData, FilterTransfer, FilterPrice, FilterAirline };

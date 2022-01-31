@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { selectFilterData } from './filterTranfers';
-import { filtrationPrice } from './filterPrice';
+import { selectFilterData } from './filtrationTranfers';
+import { filtrationPrice } from './filtrationPrice';
 
 const slice = createSlice({
-  name: 'filterAirlines',
+  name: 'filtrationAirlines',
   initialState: {
     data: [],
     type: {},
@@ -31,7 +31,7 @@ const slice = createSlice({
 
 export const { checkAirlines, setFilteredData } = slice.actions;
 
-export const selectionAirlinesData = (state) => state.filterAirlines.data;
+export const selectionAirlinesData = (state) => state.filtrationAirlines.data;
 
 export const filtrationAirlines = (payload) => (dispatch, getState) => {
   const data = selectFilterData(getState());

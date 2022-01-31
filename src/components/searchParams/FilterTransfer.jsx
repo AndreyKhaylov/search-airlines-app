@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { filtrationTranfers } from '../../store/reducers/filterTranfers';
+import { filtrationTranfers } from '../../store/reducers/filtrationTranfers';
 
 const data = {
     title: 'Фильтровать',

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { filtrationAirlines } from '../../store/reducers/filterAirlines';
+import { filtrationAirlines } from '../../store/reducers/filtrationAirlines';
 import { selectData } from '../../store/reducers/dataFlights';
 
 const AIRLINE = 'Авикомпания';
 
-export const SelectionAirline = () => {
+export const FilterAirline = () => {
     const dispatch = useDispatch()
     const data = useSelector(selectData)
     const arr = [] // array of unique airlines
