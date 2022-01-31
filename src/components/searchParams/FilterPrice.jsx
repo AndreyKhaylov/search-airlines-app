@@ -21,8 +21,9 @@ export const FilterPrice = () => {
     const onSettingPrice = (e) => {
         const { name, value } = e.target
         setRange({ ...range, [name]: Number(value) })
-        debounce(range)
     }
+
+    debounce(range)
 
     return (
         <div>

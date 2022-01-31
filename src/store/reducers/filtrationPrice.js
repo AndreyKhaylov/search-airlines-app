@@ -16,6 +16,7 @@ const slice = createSlice({
     checkRange(state, action) {
       const { payload } = action;
       const { range } = state;
+      console.log('payload', payload);
       if (payload.down) range.down = payload.down;
       if (payload.up) range.up = payload.up;
     },
