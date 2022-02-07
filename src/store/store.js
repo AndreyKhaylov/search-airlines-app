@@ -5,6 +5,7 @@ import filtrationTranfers from './reducers/filtrationTranfers';
 import filtrationAirlines from './reducers/filtrationAirlines';
 import filtrationPrice from './reducers/filtrationPrice';
 import sortingData from './reducers/sortingData';
+import pagination from './reducers/pagination';
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export const store = configureStore({
     filtrationAirlines,
     filtrationPrice,
     sortingData,
+    pagination,
   },
 });
