@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { selectionSettingData } from './filtrationPrice';
+import { pagination } from './pagination';
 
 const slice = createSlice({
   name: 'sortingData',
@@ -58,6 +59,7 @@ export const sortingData = (payload) => (dispatch, getState) => {
   const data = selectionSettingData(getState());
   payload && dispatch(checkType(payload));
   dispatch(setSortedData(data));
+  dispatch(pagination());
 };
 
 export default slice.reducer;
