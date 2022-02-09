@@ -2,7 +2,6 @@ import React from 'react';
 
 export const FlightTimeInfo = ({info}) => {
     
-    console.log('info', info)
 
     return (
         <div>

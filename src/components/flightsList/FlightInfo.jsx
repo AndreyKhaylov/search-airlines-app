@@ -23,8 +23,9 @@ export const FlightInfo = ({...flight}) => {
 
             const segments = legs.segments[num];
 
+
             return {
-                [`${transit}City`]: segments[`${transit}City`].caption,                              
+                [`${transit}City`]: segments[`${transit}City`]?.caption,                              
                 [`${transit}Airport`]: {
                     name: segments[`${transit}Airport`].caption,
                     uid: segments[`${transit}Airport`].uid,

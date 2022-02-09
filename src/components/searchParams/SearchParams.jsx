@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { Sort, Filter, SettingPrice, SelectionAirline } from './';
+import { SortData, FilterTransfer, FilterPrice, FilterAirline } from '.';
 
 export const SearchParams = () => {
     return (
         <div>
-            <Sort />
-            <Filter />
-            <SettingPrice />
-            <SelectionAirline />
+            <SortData />
+            <FilterTransfer />
+            <FilterPrice />
+            <FilterAirline />
         </div>
     )
 }
