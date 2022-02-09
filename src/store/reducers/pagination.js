@@ -7,26 +7,23 @@ export const slice = createSlice({
   initialState: {
     isLoading: false,
     data: [],
-    portionData: [],
     index: 1,
-    showNumEL: 3,
+    onPageNumElem: 3,
   },
   reducers: {
     fetchLoading(state, action) {
       state.isLoading = action.payload;
     },
-    setData(state, action) {
-      state.data = action.payload;
-    },
     setIndex(state, action) {
       state.index = state.index + action.payload;
     },
-    showFlights(state) {
-      const { portionData, index, showNumEL, data } = state;
+    showFlights(state, action) {
+      const { index, onPageNumElem } = state;
+      const { payload } = action;
 
       if (index) {
-        for (let i = (index - 1) * (showNumEL - 1); i <= index * (showNumEL - 1); i++) {
-          portionData.push(data[i]);
+        for (let i = 0; i <= index * (onPageNumElem - 1); i++) {
+          state.data = [...state.data, payload[i]];
         }
       }
     },
@@ -35,13 +32,12 @@ export const slice = createSlice({
 
 export const { fetchLoading, setData, setIndex, showFlights } = slice.actions;
 
-export const selectData = (state) => state.pagination.portionData;
+export const selectData = (state) => state.pagination.data;
 
 export const pagination = (payload) => (dispatch, getState) => {
   const data = selectionSortData(getState());
-  dispatch(setData(data));
   payload && dispatch(setIndex(payload));
-  dispatch(showFlights());
+  data && dispatch(showFlights(data));
 };
 
 export default slice.reducer;
