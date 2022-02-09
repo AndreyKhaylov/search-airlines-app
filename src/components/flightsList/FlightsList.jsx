@@ -1,23 +1,32 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FlightInfo } from './FlightInfo';
-import { selectionSortData } from '../../store/reducers/sortingData';
+// import { selectionSortData } from '../../store/reducers/sortingData';
+import { pagination, selectData } from '../../store/reducers/pagination';
 
 export const FlightsList = () => {
-    const flights = useSelector(selectionSortData)
+    // const flights = useSelector(selectionSortData)
+    const flights = useSelector(selectData)
+    const dispatch = useDispatch()
+
+    const onHandleClick = () => {
+        dispatch(pagination(1))
+    }
+
+    console.log('flights', flights)
     
     return (
         <>
-            {flights.map(({flight, flightToken}) => (
-                <section key={flightToken}>
+            {flights && flights.map(({flight, flightToken}, index) => (
+                <section key={index}>
                     <FlightInfo {...flight} />
                     <button>
                         Выбрать
                     </button>
                 </section>
             ))}
-            <button>
+            <button onClick = {onHandleClick}>
                 Показать еще
             </button>
         </>
