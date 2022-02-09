@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import dataFlights from './reducers/dataFlights';
-import filtrationTranfers from './reducers/filtrationTranfers';
-import filtrationAirlines from './reducers/filtrationAirlines';
-import filtrationPrice from './reducers/filtrationPrice';
-import sortingData from './reducers/sortingData';
-import pagination from './reducers/pagination';
+import {
+  dataFlights,
+  filtrationTranfers,
+  filtrationAirlines,
+  filtrationPrice,
+  sortingData,
+  pagination,
+} from './reducers';
 
 export const store = configureStore({
   reducer: {
