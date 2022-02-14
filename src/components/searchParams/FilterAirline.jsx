@@ -11,40 +11,36 @@ const AIRLINE = 'Авикомпания';
 export const FilterAirline = () => {
     const dispatch = useDispatch()
     const data = useSelector(selectData)
-    const arr = [] // array of unique airlines
-    
+    const arr = [] // unique airlines
+
     const onSetAirlines = (e) => {
         const { checked, value } = e.target
         dispatch(filtrationAirlines({ value, checked }))
     }
 
+    const controlProps = (carrier) => ({
+        value: carrier.caption,
+        onChange: onSetAirlines,
+        control: <Checkbox size="small"/>,
+        label: `- (${carrier.airlineCode}) ${carrier.caption}`,
+        labelPlacement: "end",
+    })
+
     return (
         <FormControl sx={{ mt: 4 }} >
-            <FormLabel >{ AIRLINE }</FormLabel>
+            <FormLabel>{ AIRLINE }</FormLabel>
             <FormGroup sx={{ m: 2 }}>
                 {
-                    data.map(({ flight: { carrier }}, i) => { 
-                        if(!arr.includes(carrier.caption)) {
-                            arr.push(carrier.caption)
-                            return (
-                                <FormControlLabel 
-                                    key={ i }
-                                    value={ carrier.caption }
-                                    onChange={ onSetAirlines }
-                                    control={ <Checkbox size="small"/> }
-                                    label={ `- (${carrier.airlineCode}) ${carrier.caption}` }
-                                    labelPlacement="end"
-                                />
-                            )
-                        }
-                        return null 
-                    })
+                    data.map(({ flight: { carrier }}, idx) => (
+                        !arr.includes(carrier.caption) 
+                        ? (arr.push(carrier.caption),
+                            <FormControlLabel key={idx} 
+                                {...controlProps(carrier)} />
+                            ) 
+                        : null
+                    ))
                 }
             </FormGroup>
         </FormControl>
     )
 }
-
-// this.props.comments
-//   .filter(commentReply => commentReply.replyTo === comment.id)
-//   .map((commentReply, idx) => <CommentItem key={idx} className="SubComment"/>);
