@@ -2,6 +2,8 @@ import React from 'react';
 
 import { FlightTimeInfo } from './FlightTimeInfo';
 
+import { AppBar, Box, Toolbar, Typography } from '@mui/material/';
+
 export const FlightInfo = ({...flight}) => {
     const price = flight.price.total;
 
@@ -41,22 +43,31 @@ export const FlightInfo = ({...flight}) => {
     }
 
     const flightTo = flightData(0);
-    const flightFrom = flightData(1)
+    const flightFrom = flightData(1);
 
     return (
-        <div>
-            <section>
-                <div>LOGO</div>
-                <div>
-                    <div>{price.amount} {price.currency}</div>
-                    <p>Cтоиомсть для одного взрослого пассажира</p>
-                </div>
-            </section>
-            <section>
+        <>
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: 18 }}>
+                            LOGO
+                        </Typography>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: 16 }}>
+                                { price.amount } { price.currency }
+                            </Typography>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: 12 }}>
+                                Cтоимость для одного взрослого пассажира
+                            </Typography>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+            </Box>
+            <Box>
                 <FlightTimeInfo info={flightTo} />
-                <div></div>
                 <FlightTimeInfo info={flightFrom} />
-            </section>
-        </div>
+            </Box>
+        </>
     )
 }
