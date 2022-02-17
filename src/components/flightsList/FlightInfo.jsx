@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FlightTimeInfo } from './FlightTimeInfo';
 
-import { AppBar, Box, Toolbar, Typography } from '@mui/material/';
+import { AppBar, Box, Toolbar, Typography, Divider } from '@mui/material/';
 
 export const FlightInfo = ({...flight}) => {
     const price = flight.price.total;
@@ -47,26 +47,29 @@ export const FlightInfo = ({...flight}) => {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1 }}>
+            <Box>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: 18 }}>
-                            LOGO
-                        </Typography>
                         <Box sx={{ flexGrow: 1 }}>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: 16 }}>
+                            <Typography variant="h6" sx={{ fontSize: 18 }}>
+                                LOGO
+                            </Typography>
+                        </Box>
+                        <Box>
+                            <Typography variant="h6" sx={{ fontSize: 16, textAlign: "right" }}>
                                 { price.amount } { price.currency }
                             </Typography>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontSize: 12 }}>
+                            <Typography variant="h6" sx={{ fontSize: 12 }}>
                                 Cтоимость для одного взрослого пассажира
                             </Typography>
                         </Box>
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Box>
-                <FlightTimeInfo info={flightTo} />
-                <FlightTimeInfo info={flightFrom} />
+            <Box sx={{ padding: 2 }}>
+                <FlightTimeInfo info={ flightTo } />
+                <Divider sx={{ mt: 1, mb: 1 }}/>
+                <FlightTimeInfo info={ flightFrom } />
             </Box>
         </>
     )
