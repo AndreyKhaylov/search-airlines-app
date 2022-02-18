@@ -2,13 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FlightInfo } from './FlightInfo';
-// import { selectionSortData } from '../../store/reducers/sortingData';
 import { pagination, selectData } from '../../store/reducers/pagination';
+import { CustomButton } from '../button/button';
 
 import Box from '@mui/material/Box';
 
 export const FlightsList = () => {
-    // const flights = useSelector(selectionSortData)
     const flights = useSelector(selectData)
     const dispatch = useDispatch()
 
@@ -16,21 +15,19 @@ export const FlightsList = () => {
         dispatch(pagination(1))
     }
 
-    console.log('flights', flights)
-    
     return (
         <Box sx={{ flexDirection: 'column' }}>
-            {flights && flights.map(({flight, flightToken}, index) => (
-                <section key={index}>
+            {flights && flights.map(({ flight, flightToken }, idx) => (
+                <section key={ idx }>
                     <FlightInfo {...flight} />
-                    <button>
+                    <CustomButton onClick={() => console.log('select')}>
                         Выбрать
-                    </button>
+                    </CustomButton>
                 </section>
             ))}
-            <button onClick = {onHandleClick}>
+            <CustomButton onClick={ onHandleClick }>
                 Показать еще
-            </button>
+            </CustomButton>
         </Box>
     )
 }
