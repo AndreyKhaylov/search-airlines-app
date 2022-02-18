@@ -9,13 +9,10 @@ export const FlightInfo = ({...flight}) => {
 
     function flightData(stage){
         const legs = flight.legs[stage]
-
         const duration = legs.duration
         const transfers = legs.segments.length - 1
-        const airline = {
-            name: legs.segments[0].airline.caption,
-        }  
-
+        const airline = legs.segments[0].airline.caption
+        
         const transit = (transit) => {
             let num = 0;
 
@@ -25,21 +22,26 @@ export const FlightInfo = ({...flight}) => {
 
             const segments = legs.segments[num];
 
-
             return {
-                [`${transit}City`]: segments[`${transit}City`]?.caption,                              
-                [`${transit}Airport`]: {
-                    name: segments[`${transit}Airport`].caption,
+                [transit]: {
+                    date: segments[`${transit}Date`],
+                    city: segments[`${transit}City`]?.caption,
+                    airport: segments[`${transit}Airport`].caption,
                     uid: segments[`${transit}Airport`].uid,
-                },
-                [`${transit}Date`]: segments[`${transit}Date`],
+                }
             }
         }
 
-        const dep = transit('departure');
-        const arvl = transit('arrival');
+        const departure = transit('departure');
+        const arrival = transit('arrival');
 
-        return [ dep, arvl, airline, transfers, duration ]
+        return {
+            departure,
+            arrival,
+            duration,
+            transfers,
+            airline,
+        }
     }
 
     const flightTo = flightData(0);

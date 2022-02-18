@@ -1,11 +1,12 @@
 import React from 'react';
 
-export const FlightTimeInfo = ({info}) => {
+export const FlightTimeInfo = ({ info }) => {
     
+    console.log(info)
 
     return (
         <div>
-            <section>
+            {/* <section>
                 <span>{info[0].departureCity}</span>
                 <span>{info[0].departureAirport.name}</span>
                 <span>({info[0].departureAirport.uid})</span>
@@ -27,7 +28,7 @@ export const FlightTimeInfo = ({info}) => {
                 <span>{info[3]} пересадка</span>
                 <span></span>
             </section>
-            <section>Рейс выполняет: {info[2].name}</section>
+            <section>Рейс выполняет: {info[2].name}</section> */}
         </div>
     )
 }

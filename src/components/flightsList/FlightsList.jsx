@@ -20,7 +20,7 @@ export const FlightsList = () => {
             {flights && flights.map(({ flight, flightToken }, idx) => (
                 <section key={ idx }>
                     <FlightInfo {...flight} />
-                    <CustomButton onClick={() => console.log('select')}>
+                    <CustomButton onClick={() => console.log('select', flightToken)}>
                         Выбрать
                     </CustomButton>
                 </section>
