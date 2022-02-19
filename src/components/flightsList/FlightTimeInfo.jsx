@@ -1,34 +1,46 @@
 import React from 'react';
 
-export const FlightTimeInfo = ({ info }) => {
-    
-    console.log(info)
+import { styled } from '@mui/material/styles';
+import { Divider, Box, Stack } from '@mui/material';
+// import { ArrowRightAltIcon } from '@mui/icons-material';
 
-    return (
-        <div>
-            {/* <section>
-                <span>{info[0].departureCity}</span>
-                <span>{info[0].departureAirport.name}</span>
-                <span>({info[0].departureAirport.uid})</span>
-                <span>-&gt; </span>
-                <span>{info[1].arrivalCity}</span>
-                <span>{info[1].arrivalAirport.name}</span>
-                <span>({info[1].arrivalAirport.uid})</span>
-            </section>
-            <section>
-                <span>{info[0].departureDate}</span>
-                <span>{info[4]}</span>
-                <span>{info[1].arrivalDate}</span>
-            </section>
-            <section>
-                <span>{info[3]} пересадка</span>
-                <span></span>
-            </section>
-            <section>
-                <span>{info[3]} пересадка</span>
-                <span></span>
-            </section>
-            <section>Рейс выполняет: {info[2].name}</section> */}
-        </div>
-    )
+const Root = styled('div')(({ theme }) => ({
+  width: '100%',
+  minWidth: 550,
+  ...theme.typography.body2,
+  '& > :not(style) + :not(style)': {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+const Item = styled('div')(({ theme }) => ({
+  margin: theme.spacing(0.1),
+  color: theme.palette.text.secondary,
+}));
+
+export function FlightTimeInfo({ info }) {
+  const { departure, arrival, duration, transfers, airline } = info;
+  return (
+    <Root>
+      <Box>
+        <Stack direction='row' spacing={1}>
+          <Item>{departure.city},</Item>
+          <Item>{departure.airport}</Item>
+          <Item>({departure.uid})</Item>
+          <Item>{arrival.city},</Item>
+          <Item>{arrival.airport}</Item>
+          <Item>({arrival.uid})</Item>
+        </Stack>
+      </Box>
+      <Box>
+        <Stack direction='row' spacing={1}>
+          <Item>{departure.date}</Item>
+          <Item>{duration}</Item>
+          <Item>{arrival.date}</Item>
+        </Stack>
+        <Divider>{`пересадок: ${transfers}`}</Divider>
+      </Box>
+      <Item>{`Рейс выполняет: ${airline}`}</Item>
+    </Root>
+  );
 }
