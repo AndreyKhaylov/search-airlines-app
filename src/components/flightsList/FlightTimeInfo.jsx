@@ -2,7 +2,9 @@ import React from 'react';
 
 import { styled } from '@mui/material/styles';
 import { Divider, Box, Stack } from '@mui/material';
-// import { ArrowRightAltIcon } from '@mui/icons-material';
+import { ArrowRightAltIcon } from '@mui/icons-material';
+import Icon from '@mui/material/Icon';
+import Chip from '@mui/material/Chip';
 
 const Root = styled('div')(({ theme }) => ({
   width: '100%',
@@ -22,24 +24,27 @@ export function FlightTimeInfo({ info }) {
   const { departure, arrival, duration, transfers, airline } = info;
   return (
     <Root>
-      <Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Stack direction='row' spacing={1}>
           <Item>{departure.city},</Item>
           <Item>{departure.airport}</Item>
           <Item>({departure.uid})</Item>
+        </Stack>
+        <Chip icon={<ArrowRightAltIcon />} label='Arrow right icon' />
+        <Stack direction='row' spacing={1}>
           <Item>{arrival.city},</Item>
           <Item>{arrival.airport}</Item>
           <Item>({arrival.uid})</Item>
         </Stack>
       </Box>
-      <Box>
-        <Stack direction='row' spacing={1}>
-          <Item>{departure.date}</Item>
-          <Item>{duration}</Item>
-          <Item>{arrival.date}</Item>
-        </Stack>
-        <Divider>{`пересадок: ${transfers}`}</Divider>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Item>{departure.date}</Item>
+        <Item>{duration}</Item>
+        <Item>{arrival.date}</Item>
       </Box>
+      <Divider>
+        <Item>{`пересадок: ${transfers}`}</Item>
+      </Divider>
       <Item>{`Рейс выполняет: ${airline}`}</Item>
     </Root>
   );
