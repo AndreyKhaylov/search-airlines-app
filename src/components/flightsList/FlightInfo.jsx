@@ -68,8 +68,13 @@ export const FlightInfo = ({ ...flight }) => {
       </Box>
       <Box sx={{ padding: 2 }}>
         <FlightTimeInfo info={flightTo} />
-        <Divider sx={{ mt: 1, mb: 0.5 }} />
-        <Divider sx={{ mt: 0.5, mb: 1 }} />
+        <Divider
+          sx={{
+            marginTop: 2,
+            marginBottom: 2,
+            border: '1px solid rgba(0, 100, 200, 1)',
+          }}
+        />
         <FlightTimeInfo info={flightFrom} />
       </Box>
     </>
