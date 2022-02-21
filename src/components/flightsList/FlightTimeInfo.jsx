@@ -3,6 +3,7 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Divider, Stack } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const Root = styled('div')(({ theme }) => ({
   width: '100%',
@@ -48,7 +49,10 @@ export function FlightTimeInfo({ info }) {
       </Box>
       <Box>
         <Item>{departure.date}</Item>
-        <Item>{`${hour}ч ${minute}мин`}</Item>
+        <Item>
+          <AccessTimeIcon sx={{ fontSize: 16, mr: 0.5 }} />
+          {`${hour}ч ${minute}мин`}
+        </Item>
         <Item>{arrival.date}</Item>
       </Box>
       <Divider>
