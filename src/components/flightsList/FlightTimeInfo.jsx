@@ -26,6 +26,11 @@ const Box = styled('div')(({ theme }) => ({
 
 export function FlightTimeInfo({ info }) {
   const { departure, arrival, duration, transfers, airline } = info;
+
+  const time = duration / 60;
+  const hour = Math.floor(time);
+  const minute = Math.round(60 / ((time - Math.trunc(time)) * 10));
+
   return (
     <Root>
       <Box>
@@ -43,7 +48,7 @@ export function FlightTimeInfo({ info }) {
       </Box>
       <Box>
         <Item>{departure.date}</Item>
-        <Item>{duration}</Item>
+        <Item>{`${hour}ч ${minute}мин`}</Item>
         <Item>{arrival.date}</Item>
       </Box>
       <Divider>
