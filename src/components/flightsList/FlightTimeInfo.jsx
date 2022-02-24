@@ -36,9 +36,9 @@ export function FlightTimeInfo({ info }) {
     const newDate = new Date(date);
     const dateArr = newDate.toString().split(' ');
     return `${dateArr[4].slice(0, 5)}, 
-    ${dateArr[2]} 
-    ${dateArr[1]}, 
-    ${dateArr[0]}`;
+            ${dateArr[2]} 
+            ${dateArr[1]}, 
+            ${dateArr[0]}`;
   };
 
   return (
