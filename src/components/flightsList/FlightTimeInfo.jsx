@@ -32,6 +32,15 @@ export function FlightTimeInfo({ info }) {
   const hour = Math.floor(time);
   const minute = Math.round(60 / ((time - Math.trunc(time)) * 10));
 
+  const transformData = (date) => {
+    const newDate = new Date(date);
+    const dateArr = newDate.toString().split(' ');
+    return `${dateArr[4].slice(0, 5)}, 
+    ${dateArr[2]} 
+    ${dateArr[1]}, 
+    ${dateArr[0]}`;
+  };
+
   return (
     <Root>
       <Box>
@@ -48,12 +57,12 @@ export function FlightTimeInfo({ info }) {
         </Stack>
       </Box>
       <Box>
-        <Item>{departure.date}</Item>
+        <Item>{transformData(departure.date)}</Item>
         <Item>
           <AccessTimeIcon sx={{ fontSize: 16, mr: 0.5 }} />
           {`${hour}ч ${minute}мин`}
         </Item>
-        <Item>{arrival.date}</Item>
+        <Item>{transformData(arrival.date)}</Item>
       </Box>
       <Divider>
         <Item sx={{ color: '#e67e22' }}>{`пересадок: ${transfers}`}</Item>
