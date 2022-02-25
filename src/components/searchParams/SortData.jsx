@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { sortingData, selectionSortType} from '../../store/reducers/sortingData';
 
-const title = {
+import { FormLabel, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material/';
+
+const text = {
     title: 'Сортировать',
-    incrementPrice: '- По возрвстанию цены',
+    incrementPrice: '- По возрастанию цены',
     decrementPrice: '- По убыванию цены',
     time: '- По времени в пути'
 };
@@ -25,47 +27,39 @@ export const SortData = () => {
         dispatch(sortingData({ value }))
     };
 
+    const controlProps = (sortBy, text) => ({
+        value: sortBy ,
+        onChange: onSetTypeSort ,
+        checked: sortingType === sortBy,
+        control: <Radio size="small"/>,
+        label: text,
+    })
+
     return (
-        <section>
-            <h4>{ title.title }</h4>
-            <label>
-                <input
-                    type='radio'
-                    name='sort'
-                    value={sortBy.incrementPrice}
-                    onChange={onSetTypeSort}
-                    checked={sortingType === sortBy.incrementPrice}
+        <FormControl>
+            <FormLabel id='radio-buttons-group-label'>{ text.title }</FormLabel>
+            <RadioGroup sx={{ m: 2 }} 
+                        aria-labelledby="radio-buttons-group-label"
+                        name="radio-buttons-group">
+                <FormControlLabel 
+                    { ...controlProps(
+                        sortBy.incrementPrice,
+                        text.incrementPrice
+                    )}
                 />
-                { title.incrementPrice }
-            </label>
-            <label>
-                <input
-                    type='radio'
-                    name='sort'
-                    value={sortBy.decrementPrice}
-                    onChange={onSetTypeSort}
-                    checked={sortingType === sortBy.decrementPrice}
+                <FormControlLabel
+                    { ...controlProps(
+                        sortBy.decrementPrice,
+                        text.decrementPrice
+                    )}
                 />
-                 { title.decrementPrice }
-            </label>
-            <label>
-                <input
-                    type='radio'
-                    name='sort'
-                    value={sortBy.time}
-                    onChange={onSetTypeSort}
-                    checked={sortingType === sortBy.time}
+                <FormControlLabel
+                    { ...controlProps(
+                        sortBy.time,
+                        text.time
+                    )}
                 />
-                { title.time }
-            </label>
-        </section>
+            </RadioGroup>
+        </FormControl>
     )
 }
-
-// export const useInput = initialValue => {
-//     const [value, setValue] = useState(initialValue);
-//     return [
-//     { value, onChange: e => setValue(e.target.value) },
-//     () => setValue(initialValue)
-//     ];
-//     };

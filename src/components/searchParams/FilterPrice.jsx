@@ -4,48 +4,60 @@ import { useDispatch } from 'react-redux';
 import { filtrationPrice } from '../../store/reducers/filtrationPrice';
 import useDebounce from '../../hook/useDebounce';
 
-const text = {
-    title: 'Цена',
-    priceFrom: 'От',
-    priceTo: 'До'
-}
+import { FormLabel, FormControl, Box, TextField, Divider } from '@mui/material/';
+
+const data = {
+  title: 'Цена',
+  label: { 0: 'От', 1: 'До' },
+  name: { 0: 'down', 1: 'up' },
+};
 
 export const FilterPrice = () => {
-    const dispatch = useDispatch()
-    const [range, setRange] = useState({})
+  const dispatch = useDispatch();
+  const [range, setRange] = useState({});
 
-    const debounce = useDebounce((value) => {
-        dispatch(filtrationPrice(value))
-    }, 750)
+  const { title, label, name } = data;
 
-    const onSettingPrice = (e) => {
-        const { name, value } = e.target
-        setRange({ ...range, [name]: Number(value) })
-    }
+  const debounce = useDebounce((value) => {
+    dispatch(filtrationPrice(value));
+  }, 750);
 
-    debounce(range)
+  const onSettingPrice = (e) => {
+    const { name, value } = e.target;
+    setRange({ ...range, [name]: Number(value) });
+  };
 
-    return (
-        <div>
-            <h4>{text.title}</h4>
-            <label>
-                {text.priceFrom}
-                <input
-                    type='number'
-                    name='down'
-                    value={range.down}
-                    onChange={(e) => onSettingPrice(e)}
-                />
-            </label>
-            <label>
-                {text.priceTo}
-                <input
-                    type='number'
-                    name='up'
-                    value={range.up}
-                    onChange={(e) => onSettingPrice(e)}
-                />
-            </label>
-        </div>
-    )
-}
+  debounce(range);
+
+  const controlProps = (name, label, range) => ({
+    name: name,
+    label: label,
+    type: 'number',
+    value: range,
+    onChange: onSettingPrice,
+    defaultValue: '0',
+    InputLabelProps: {
+      shrink: true,
+    },
+    size: 'small',
+  });
+
+  return (
+    <FormControl sx={{ mt: 2 }}>
+      <FormLabel id='input-group-label'>{title}</FormLabel>
+      <Box
+        component='form'
+        sx={{
+          mt: 4,
+          ml: 2,
+          '& .MuiTextField-root': { width: '25ch' },
+        }}
+        noValidate
+        autoComplete='off'>
+        <TextField {...controlProps(name[0], label[0], range[name[0]])} />
+        <Divider sx={{ m: 2 }}></Divider>
+        <TextField {...controlProps(name[1], label[1], range[name[1]])} />
+      </Box>
+    </FormControl>
+  );
+};

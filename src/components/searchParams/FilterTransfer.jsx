@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import { filtrationTranfers } from '../../store/reducers/filtrationTranfers';
 
+import { FormLabel, FormControl, FormGroup, FormControlLabel, Checkbox } from '@mui/material/';
+
 const data = {
     title: 'Фильтровать',
     value: {
@@ -16,34 +18,35 @@ const data = {
 }
 
 export const FilterTransfer = () => {
+    const { title, value, label } = data
     const dispatch = useDispatch();
-
+    
     const onSetTypeFilter = (e) => {
         const { value, checked } = e.target
         dispatch(filtrationTranfers({ value, checked }))
     }
+    
+    const controlProps = (value, label) => ({
+        value: value,
+        onChange: onSetTypeFilter,
+        control: <Checkbox size="small"/>,
+        label: label,
+        labelPlacement: "end",
+    })
 
     return (
-        <div>
-            <h4>{data.title}</h4>
-            <label>
-                <input
-                    type='checkbox'
-                    name='filter'
-                    value={data.value[1]}
-                    onChange={onSetTypeFilter}
+        <FormControl sx={{ mt: 2 }} >
+            <FormLabel>{ title }</FormLabel>
+            <FormGroup sx={{ m: 2 }}>
+                <FormControlLabel  
+                    {...controlProps(
+                        value[1], label[1] )} 
                 />
-                {data.label[1]}
-            </label>
-            <label>
-                <input
-                    type='checkbox'
-                    name='filter'
-                    value={data.value[0]}
-                    onChange={onSetTypeFilter}
+                <FormControlLabel  
+                    {...controlProps(
+                        value[0], label[0] )} 
                 />
-                {data.label[0]}
-            </label>
-        </div>
+            </FormGroup>
+        </FormControl>
     )
 }

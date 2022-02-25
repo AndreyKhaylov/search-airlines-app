@@ -2,61 +2,81 @@ import React from 'react';
 
 import { FlightTimeInfo } from './FlightTimeInfo';
 
-export const FlightInfo = ({...flight}) => {
-    const price = flight.price.total;
+import { AppBar, Box, Toolbar, Typography, Divider } from '@mui/material/';
 
-    function flightData(stage){
-        const legs = flight.legs[stage]
+export const FlightInfo = ({ ...flight }) => {
+  const price = flight.price.total;
 
-        const duration = legs.duration
-        const transfers = legs.segments.length - 1
-        const airline = {
-            name: legs.segments[0].airline.caption,
-        }  
+  function flightData(stage) {
+    const legs = flight.legs[stage];
+    const duration = legs.duration;
+    const transfers = legs.segments.length - 1;
+    const airline = legs.segments[0].airline.caption;
 
-        const transit = (transit) => {
-            let num = 0;
+    const transit = (transit) => {
+      let num = 0;
 
-            if((transfers > 0) && (transit === 'arrival')) {
-                num = transfers;
-            }
+      if (transfers > 0 && transit === 'arrival') {
+        num = transfers;
+      }
 
-            const segments = legs.segments[num];
+      const segments = legs.segments[num];
 
+      return {
+        date: segments[`${transit}Date`],
+        city: segments[`${transit}City`]?.caption,
+        airport: segments[`${transit}Airport`].caption,
+        uid: segments[`${transit}Airport`].uid,
+      };
+    };
 
-            return {
-                [`${transit}City`]: segments[`${transit}City`]?.caption,                              
-                [`${transit}Airport`]: {
-                    name: segments[`${transit}Airport`].caption,
-                    uid: segments[`${transit}Airport`].uid,
-                },
-                [`${transit}Date`]: segments[`${transit}Date`],
-            }
-        }
+    const departure = transit('departure');
+    const arrival = transit('arrival');
 
-        const dep = transit('departure');
-        const arvl = transit('arrival');
+    return {
+      departure,
+      arrival,
+      duration,
+      transfers,
+      airline,
+    };
+  }
 
-        return [ dep, arvl, airline, transfers, duration ]
-    }
+  const flightTo = flightData(0);
+  const flightFrom = flightData(1);
 
-    const flightTo = flightData(0);
-    const flightFrom = flightData(1)
-
-    return (
-        <div>
-            <section>
-                <div>LOGO</div>
-                <div>
-                    <div>{price.amount} {price.currency}</div>
-                    <p>Cтоиомсть для одного взрослого пассажира</p>
-                </div>
-            </section>
-            <section>
-                <FlightTimeInfo info={flightTo} />
-                <div></div>
-                <FlightTimeInfo info={flightFrom} />
-            </section>
-        </div>
-    )
-}
+  return (
+    <>
+      <Box>
+        <AppBar position='static'>
+          <Toolbar>
+            <Box sx={{ flexGrow: 1 }}>
+              <Typography variant='h6' sx={{ fontSize: 18 }}>
+                LOGO
+              </Typography>
+            </Box>
+            <Box>
+              <Typography variant='h6' sx={{ fontSize: 16, textAlign: 'right' }}>
+                {price.amount} {price.currency}
+              </Typography>
+              <Typography variant='h6' sx={{ fontSize: 12 }}>
+                Cтоимость для одного взрослого пассажира
+              </Typography>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Box sx={{ padding: 2 }}>
+        <FlightTimeInfo info={flightTo} />
+        <Divider
+          sx={{
+            marginTop: 2,
+            marginBottom: 2,
+            border: '1px solid rgba(0, 100, 200, 1)',
+          }}
+        />
+        <FlightTimeInfo info={flightFrom} />
+      </Box>
+    </>
+  );
+};
