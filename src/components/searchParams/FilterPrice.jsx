@@ -35,7 +35,7 @@ export const FilterPrice = () => {
     type: 'number',
     value: range,
     onChange: onSettingPrice,
-    defaultValue: '0',
+    defaultValue: '-',
     InputLabelProps: {
       shrink: true,
     },

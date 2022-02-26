@@ -9,7 +9,7 @@ export const SearchParams = () => {
     <Box
       sx={{
         width: 400,
-        bgcolor: '#cfe8fc',
+        bgcolor: '#c5c5c5',
         padding: '2em',
       }}>
       <SortData />
