@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/search-airlines-app/static/css/main.e6c13ad2.css",
+    "main.js": "/search-airlines-app/static/js/main.f4f14343.js",
+    "index.html": "/search-airlines-app/index.html",
+    "main.e6c13ad2.css.map": "/search-airlines-app/static/css/main.e6c13ad2.css.map",
+    "main.f4f14343.js.map": "/search-airlines-app/static/js/main.f4f14343.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.f4f14343.js"
+  ]
+}
